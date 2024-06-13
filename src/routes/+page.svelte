@@ -1,29 +1,7 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
-  import { onMount } from "svelte";
-  import { readable } from "svelte/store";
+  import Datetime from "../components/Datetime/Datetime.svelte";
 
-  const time = readable(new Date(), (set) => {
-    const interval = setInterval(() => {
-      set(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  });
-
-  let formattedTime = new Intl.DateTimeFormat("en-GB", {
-    timeStyle: "medium",
-    dateStyle: "medium",
-  }).format(new Date());
-
-  onMount(() => {
-    time.subscribe((value) => {
-      formattedTime = new Intl.DateTimeFormat("en-GB", {
-        timeStyle: "medium",
-        dateStyle: "medium",
-      }).format(value);
-    });
-  });
 
   type Category = "general" | "development" | "research";
   type Links = {
@@ -118,7 +96,7 @@
 <section class="wrapper">
   <section class="main">
     <h1 class="title">Get Started</h1>
-    <p class="datetime">{formattedTime}</p>
+    <Datetime />
     <form class="search" on:submit={handleSearch}>
       <input
         type="search"
@@ -188,10 +166,6 @@
     font-family: var(--font-mono);
   }
 
-  .main .datetime {
-    font-family: var(--font-mono);
-    padding-top: 0.8em;
-  }
 
   .search {
     width: 100%;
