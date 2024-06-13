@@ -64,7 +64,7 @@
   <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
+<section class="wrapper">
   <section class="main">
     <h1>Welcome back!</h1>
     <p>{formattedTime}</p>
@@ -101,16 +101,18 @@
 </section>
 
 <style>
-  section {
+  .wrapper {
     display: grid;
     grid-template-columns: 1fr;
-    padding-top: 3em;
+    padding-top: 1em;
     width: 100%;
+    gap: 4em;
   }
 
-  @media (min-width: 768px) {
-    section {
-      grid-template-columns: 1fr 1fr;
+  @media (min-width: 1230px) {
+    .wrapper {
+      grid-template-columns: 1fr 20em;
+      padding-top: 3em;
     }
   }
 
@@ -132,6 +134,14 @@
     width: 100%;
   }
 
+  .main h1 {
+    font-family: var(--font-mono);
+  }
+
+  .main p {
+    font-family: var(--font-mono);
+  }
+
   .search {
     width: 100%;
     padding-top: 3em;
@@ -148,9 +158,14 @@
 
   .links {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     width: 100%;
     padding-top: 3em;
+  }
+  @media (min-width: 768px) {
+    .links {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   .link-container {
     display: flex;
@@ -171,7 +186,7 @@
 
   .link-container a {
     color: var(--color-primary);
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
     text-decoration: none;
   }
   .link-container a:hover {
