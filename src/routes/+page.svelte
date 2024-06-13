@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Icon from "@iconify/svelte";
   import { onMount } from "svelte";
   import { readable } from "svelte/store";
 
@@ -24,38 +25,88 @@
     });
   });
 
-  type Category = "general" | "development" | "research"
+  type Category = "general" | "development" | "research";
   type Links = {
-    [key in Category]: Array<{ name: string; url: string }>;
-  }
+    [key in Category]: Array<{ name: string; url: string; icon: string }>;
+  };
 
   const links: Links = {
     general: [
-      { name: "Gmail", url: "https://gmail.com" },
-      { name: "Calendar", url: "https://calendar.notion.so/" },
-      { name: "Wikiwand", url: "https://www.wikiwand.com/" },
+      { name: "Gmail", url: "https://gmail.com", icon: "basil:gmail-solid" },
+      {
+        name: "Calendar",
+        url: "https://calendar.notion.so/",
+        icon: "mage:calendar-3-fill",
+      },
+      {
+        name: "Wikiwand",
+        url: "https://www.wikiwand.com/",
+        icon: "flat-color-icons:wikipedia",
+      },
     ],
     development: [
-      { name: "GitHub", url: "https://github.com/rwietter" },
-      { name: "MDN Web Docs", url: "https://developer.mozilla.org/en-US/docs/Learn" },
-      { name: "Stack Overflow", url: "https://stackoverflow.com/questions" },
-      { name: "nLab", url: "https://ncatlab.org/nlab/show/HomePage" },
-      { name: "Code Golf", url: "https://codegolf.stackexchange.com/" },
-      { name: "Hacker News", url: "https://news.ycombinator.com/" },
+      {
+        name: "GitHub",
+        url: "https://github.com/rwietter",
+        icon: "mdi:github",
+      },
+      {
+        name: "MDN Web Docs",
+        url: "https://developer.mozilla.org/en-US/docs/Learn",
+        icon: "simple-icons:mdnwebdocs",
+      },
+      {
+        name: "Stack Overflow",
+        url: "https://stackoverflow.com/questions",
+        icon: "cib:stackoverflow",
+      },
+      {
+        name: "nLab",
+        url: "https://ncatlab.org/nlab/show/HomePage",
+        icon: "arcticons:ahnlab-v3-plus",
+      },
+      {
+        name: "Code Golf",
+        url: "https://codegolf.stackexchange.com/",
+        icon: "pepicons-pencil:code-circle-filled",
+      },
+      {
+        name: "Hacker News",
+        url: "https://news.ycombinator.com/",
+        icon: "icomoon-free:hackernews",
+      },
     ],
     research: [
-      { name: "arXiv", url: "https://arxiv.org/" },
-      { name: "IEEE Xplore", url: "https://ieeexplore.ieee.org/" },
-      { name: "ACM Digital Library", url: "https://dl.acm.org/"},
-      { name: "Orcid", url: "https://orcid.org/my-orcid?orcid=0009-0003-5333-2885" },
-    ]
+      { name: "arXiv", url: "https://arxiv.org/", icon: "simple-icons:arxiv" },
+      {
+        name: "IEEE Xplore",
+        url: "https://ieeexplore.ieee.org/",
+        icon: "simple-icons:ieee",
+      },
+      {
+        name: "ACM Digital Library",
+        url: "https://dl.acm.org/",
+        icon: "simple-icons:acm",
+      },
+      {
+        name: "Orcid",
+        url: "https://orcid.org/my-orcid?orcid=0009-0003-5333-2885",
+        icon: "simple-icons:orcid",
+      },
+    ],
   };
 
   function handleSearch(event: Event) {
     event.preventDefault();
-    const searchInput = document.getElementById("browser-search") as HTMLInputElement;
+    const searchInput = document.getElementById(
+      "browser-search",
+    ) as HTMLInputElement;
     window.open(`https://duckduckgo.com/?q=${searchInput.value}`);
     searchInput.value = "";
+  }
+
+  function typedKeys<T>(obj: T): Array<keyof T> {
+    return Object.keys(obj) as Array<keyof T>;
   }
 </script>
 
@@ -66,23 +117,25 @@
 
 <section class="wrapper">
   <section class="main">
-    <h1>Welcome back!</h1>
-    <p>{formattedTime}</p>
+    <h1 class="title">Get Started</h1>
+    <p class="datetime">{formattedTime}</p>
     <form class="search" on:submit={handleSearch}>
       <input
         type="search"
         id="browser-search"
         name="browser-search"
+        autocomplete="off"
         placeholder="Search on DuckDuckGo"
       />
     </form>
-    <section class="links">
-      {#each Object.keys(links) as category}
+    <section class="links" lang="ts">
+      {#each typedKeys(links) as category}
         <section class="link-container">
           <h1>~/{category}</h1>
           <ul>
             {#each links[category] as link}
               <li>
+                <Icon icon={link.icon} />
                 <a href={link.url} target="_blank" rel="noopener">{link.name}</a>
               </li>
             {/each}
@@ -92,10 +145,7 @@
     </section>
   </section>
   <section class="image">
-    <source
-      srcset="girl.png"
-      media="(min-width: 768px)"
-    />
+    <source srcset="girl.png" media="(min-width: 768px)" />
     <img src="girl.png" alt="Kitten" />
   </section>
 </section>
@@ -134,12 +184,13 @@
     width: 100%;
   }
 
-  .main h1 {
+  .main .title {
     font-family: var(--font-mono);
   }
 
-  .main p {
+  .main .datetime {
     font-family: var(--font-mono);
+    padding-top: 0.8em;
   }
 
   .search {
@@ -148,11 +199,12 @@
   }
   .search input {
     outline: none;
-    border-radius: 0.3em;
     padding: 0.7em 1em;
     width: 100%;
+    color: var(--color-text);
     background-color: var(--color-bg);
     border: 0;
+    font-family: var(--font-mono);
     border-bottom: 1px solid var(--color-primary);
   }
 
@@ -173,6 +225,15 @@
     justify-content: flex-start;
     align-items: flex-start;
   }
+  .link-container + .link-container {
+    padding-top: 3em;
+    transition: padding-top 0.2s ease;
+  }
+  @media (min-width: 768px) {
+    .link-container + .link-container {
+      padding-top: 0;
+    }
+  }
   .link-container ul {
     padding: 1em 0 0 0;
     margin: 0;
@@ -182,7 +243,7 @@
 
   .link-container h1 {
     font-family: var(--font-sans);
-}
+  }
 
   .link-container a {
     color: var(--color-primary);
