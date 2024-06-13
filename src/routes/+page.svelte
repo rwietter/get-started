@@ -10,12 +10,11 @@
     window.open(`https://duckduckgo.com/?q=${searchInput.value}`);
     searchInput.value = "";
   }
-
 </script>
 
 <svelte:head>
-  <title>Home</title>
-  <meta name="description" content="Svelte demo app" />
+  <title>~/getstarted</title>
+  <meta name="description" content="Get started your internet journey with this page" />
 </svelte:head>
 
 <section class="wrapper">
