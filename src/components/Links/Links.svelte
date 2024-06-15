@@ -1,7 +1,7 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
 
-  type Category = "general" | "development" | "research";
+  type Category = "general" | "development" | "research" | "ai" | "math";
   type Links = {
     [key in Category]: Array<{ name: string; url: string; icon: string }>;
   };
@@ -18,6 +18,16 @@
         name: "Wikiwand",
         url: "https://www.wikiwand.com/",
         icon: "flat-color-icons:wikipedia",
+      },
+      {
+        name: "Hacker News",
+        url: "https://news.ycombinator.com/",
+        icon: "icomoon-free:hackernews",
+      },
+      {
+        name: "TI Lecture Notes",
+        url: "https://www.brainkart.com/menu/information-technology-engineering/",
+        icon: "mdi:book-open-variant",
       },
     ],
     development: [
@@ -37,19 +47,19 @@
         icon: "cib:stackoverflow",
       },
       {
-        name: "nLab",
-        url: "https://ncatlab.org/nlab/show/HomePage",
-        icon: "arcticons:ahnlab-v3-plus",
+        name: "Refactoring Guru",
+        url: "https://refactoring.guru/pt-br",
+        icon: "arcticons:battery-guru",
       },
       {
-        name: "Code Golf",
-        url: "https://codegolf.stackexchange.com/",
-        icon: "pepicons-pencil:code-circle-filled",
+        name: "Source Making",
+        url: "https://sourcemaking.com/",
+        icon: "game-icons:gear-stick-pattern",
       },
       {
-        name: "Hacker News",
-        url: "https://news.ycombinator.com/",
-        icon: "icomoon-free:hackernews",
+        name: "Patterns.dev",
+        url: "https://www.patterns.dev/",
+        icon: "eos-icons:patterns-outlined",
       },
     ],
     research: [
@@ -65,9 +75,58 @@
         icon: "simple-icons:acm",
       },
       {
+        name: "CS Theory",
+        url: "https://cstheory.stackexchange.com/",
+        icon: "cib:stackexchange",
+      },
+      {
         name: "Orcid",
         url: "https://orcid.org/my-orcid?orcid=0009-0003-5333-2885",
         icon: "simple-icons:orcid",
+      },
+    ],
+    ai: [
+      {
+        name: "GPT",
+        url: "https://chatgpt.com/",
+        icon: "arcticons:openai-chatgpt",
+      },
+      {
+        name: "Anthropic",
+        url: "https://console.anthropic.com/workbench/71fc965a-5548-4149-8328-bba0b64499d2",
+        icon: "simple-icons:anthropic",
+      },
+      {
+        name: "Perplexity",
+        url: "https://www.perplexity.ai/",
+        icon: "arcticons:perplexity",
+      },
+    ],
+    math: [
+      {
+        name: "Wolfram Alpha",
+        url: "https://www.wolframalpha.com/",
+        icon: "simple-icons:wolfram",
+      },
+      {
+        name: "nLab",
+        url: "https://ncatlab.org/nlab/show/HomePage",
+        icon: "arcticons:ahnlab-v3-plus",
+      },
+      {
+        name: "Math is Fun",
+        url: "https://www.mathsisfun.com/",
+        icon: "simple-icons:awslambda",
+      },
+      {
+        name: "Better Explained",
+        url: "https://betterexplained.com/archives/",
+        icon: "ooui:mathematics",
+      },
+      {
+        name: "Set Theory",
+        url: "https://settheory.net/",
+        icon: "mdi:set-center",
       },
     ],
   };
@@ -98,11 +157,12 @@
     display: grid;
     grid-template-columns: 1fr;
     width: 100%;
-    padding-top: 3em;
+    gap: 2em;
+    padding-top: 2em;
   }
   @media (min-width: 768px) {
     .links {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
   }
   .link-container {
@@ -111,10 +171,7 @@
     justify-content: flex-start;
     align-items: flex-start;
   }
-  .link-container + .link-container {
-    padding-top: 3em;
-    transition: padding-top 0.2s ease;
-  }
+
   @media (min-width: 768px) {
     .link-container + .link-container {
       padding-top: 0;
@@ -125,6 +182,14 @@
     margin: 0;
     line-height: 1.5em;
     list-style: none;
+  }
+
+  .link-container li {
+    display: flex;
+    align-items: center;
+  }
+  .link-container li a {
+    padding-left: 0.5em;
   }
 
   .link-container h1 {
