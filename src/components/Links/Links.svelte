@@ -97,6 +97,11 @@
         icon: "simple-icons:anthropic",
       },
       {
+        name: "Google AI",
+        url: "https://aistudio.google.com/app/prompts/new_chat",
+        icon: "ri:gemini-fill",
+      },
+      {
         name: "Perplexity",
         url: "https://www.perplexity.ai/",
         icon: "arcticons:perplexity",
