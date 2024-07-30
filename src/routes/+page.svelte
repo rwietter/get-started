@@ -108,6 +108,16 @@
         url: "https://groq.com/",
         icon: "fluent-mdl2:machine-learning",
       },
+      {
+        name: "Claude",
+        url: "https://claude.ai/new",
+        icon: "fa6-solid:bahai",
+      },
+      {
+        name: "NotebookLM",
+        url: "https://notebooklm.google.com/",
+        icon: "token:aioz",
+      },
     ],
     math: [
       {
@@ -151,7 +161,7 @@
   <section class="main">
     <h1 class="title">Get Started</h1>
     <SearchComponent />
-    <LinksComponent links={links} />
+    <LinksComponent {links} />
   </section>
   <section class="image">
     <source srcset="girl.png" media="(min-width: 768px)" />
