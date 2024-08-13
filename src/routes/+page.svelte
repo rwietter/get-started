@@ -85,7 +85,7 @@
         name: "Knight Columbia: Essays and Scholarship",
         url: "https://knightcolumbia.org/subcategory/essays-and-scholarship",
         icon: "game-icons:gear-stick-pattern"
-      }
+      },
     ],
     ai: [
       {
@@ -122,6 +122,11 @@
         name: "NotebookLM",
         url: "https://notebooklm.google.com/",
         icon: "token:aioz",
+      },
+      {
+        name: "Postgress.new",
+        url: "https://postgres.new/",
+        icon: "fluent-mdl2:machine-learning",
       },
     ],
     math: [
